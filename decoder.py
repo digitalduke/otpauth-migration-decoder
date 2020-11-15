@@ -2,7 +2,7 @@ import argparse
 import sys
 from base64 import b64decode, b32encode
 from typing import Dict, Any, List
-from urllib.parse import urlparse, parse_qs, ParseResult, urlencode
+from urllib.parse import urlparse, parse_qs, ParseResult, urlencode, quote
 
 from otpauth_enums import Algorithm, DigitCount, OtpType
 from otpauth_migration_pb2 import Payload
@@ -71,7 +71,7 @@ def get_url_params(otp) -> str:
 
 def get_otpauth_url(otp) -> str:
     otp_type = OtpType.get(otp.type, '')
-    otp_name = otp.name
+    otp_name = quote(otp.name)
     otp_params = get_url_params(otp)
 
     return f'otpauth://{otp_type}/{otp_name}?{otp_params}'
