@@ -22,3 +22,9 @@ $ pip install protobuf
 ```
 $ python decoder.py "otpauth-migration://offline?data=CjEKCkhlbGxvId6tvu8SGEV4YW1wbGU6YWxpY2VAZ29vZ2xlLmNvbRoHRXhhbXBsZTAC"
 ```
+
+
+## references
+
+1. [otpauth:// URI format](https://github.com/google/google-authenticator/wiki/Key-Uri-Format)
+1. [Protocol Buffer Basics: Python](https://developers.google.com/protocol-buffers/docs/pythontutorial)
