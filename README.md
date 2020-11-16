@@ -28,3 +28,4 @@ $ python decoder.py "otpauth-migration://offline?data=CjEKCkhlbGxvId6tvu8SGEV4YW
 
 1. [otpauth:// URI format](https://github.com/google/google-authenticator/wiki/Key-Uri-Format)
 1. [Protocol Buffer Basics: Python](https://developers.google.com/protocol-buffers/docs/pythontutorial)
+1. [Authenticator live demo](https://rootprojects.org/authenticator/)
