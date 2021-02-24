@@ -7,6 +7,7 @@ name = "pypi"
 protobuf = "~=3.14"
 
 [dev-packages]
+nuitka = "*"
 
 [requires]
 python_version = "3.8"
