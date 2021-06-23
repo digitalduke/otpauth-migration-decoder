@@ -1,2 +1,3 @@
 decoder.bin
-decoder.build/*
+decoder.build/
+decoder.dist/
