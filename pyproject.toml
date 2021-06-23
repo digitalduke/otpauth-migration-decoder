@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "otpauth-migration-decoder"
+version = "0.1.1"
+description = "Convert otpauth-migration to plain link"
+authors = ["digitalduke <digitalduke@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+protobuf = "^3.17.3"
+
+[tool.poetry.dev-dependencies]
+Nuitka = "^0.6.15"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
