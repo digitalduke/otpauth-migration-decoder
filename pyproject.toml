@@ -7,9 +7,11 @@ authors = ["digitalduke <digitalduke@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 protobuf = "^3.17.3"
+click = "^8.0.1"
 
 [tool.poetry.dev-dependencies]
 Nuitka = "^0.6.15"
+isort = "^5.9.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
