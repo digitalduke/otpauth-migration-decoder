@@ -1,5 +1,4 @@
-import argparse
-import sys
+import click
 from base64 import b64decode, b32encode
 from typing import Dict, Any, List
 from urllib.parse import urlparse, parse_qs, ParseResult, urlencode, quote
@@ -7,19 +6,12 @@ from urllib.parse import urlparse, parse_qs, ParseResult, urlencode, quote
 from otpauth_enums import Algorithm, DigitCount, OtpType
 from otpauth_migration_pb2 import Payload
 
+
 SCHEME = 'otpauth-migration'
 HOSTNAME = 'offline'
-
-
-parser = argparse.ArgumentParser(
-    description="Convert otpauth-migration to plain link",
-)
-parser.add_argument(
-    'migration',
-    help='otpauth-migration link text',
-    action='store',
-    type=str,
-)
+PAYLOAD_MARK = 'data'
+EXAMPLE_PAYLOAD = 'CjEKCkhlbGxvId6tvu8SGEV4YW1wbGU6YWxpY2VAZ29vZ2xlLmNvbRoHRXhhbXBsZTAC'
+EXAMPLE_MIGRATION = f'{SCHEME}://{HOSTNAME}?{PAYLOAD_MARK}={EXAMPLE_PAYLOAD}'
 
 
 def is_migration_incorrect(
@@ -28,10 +20,10 @@ def is_migration_incorrect(
         parsed_qs: Dict[str, Any],
 ) -> bool:
     return (
-            parsed_url.scheme != SCHEME or
-            parsed_url.hostname != HOSTNAME or
-            'data' not in parsed_qs or
-            not isinstance(parsed_qs['data'], list)
+            parsed_url.scheme != SCHEME
+            or parsed_url.hostname != HOSTNAME
+            or PAYLOAD_MARK not in parsed_qs
+            or not isinstance(parsed_qs[PAYLOAD_MARK], list)
     )
 
 
@@ -40,36 +32,27 @@ def decoded_data(data: List[str]) -> bytes:
         yield b64decode(data_item)
 
 
-def terminate(
-        *,
-        error: str,
-        code: int = 1,
-) -> None:
-    print(error, file=sys.stderr)
-    exit(code=code)
-
-
 def decode_secret(secret: bytes) -> str:
     return str(b32encode(secret), 'utf-8').replace('=', '')
 
 
-def get_url_params(otp) -> str:
+def get_url_params(otp: Payload.OtpParameters) -> str:
     params = dict()
 
     if otp.algorithm:
-        params.update({'algorithm': Algorithm.get(otp.algorithm, '')})
+        params.update(algorithm=Algorithm.get(otp.algorithm, ''))
     if otp.digits:
-        params.update({'digits': DigitCount.get(otp.digits, '')})
+        params.update(digits=DigitCount.get(otp.digits, ''))
     if otp.issuer:
-        params.update({'issuer': otp.issuer})
+        params.update(issuer=otp.issuer)
     if otp.secret:
         otp_secret = decode_secret(otp.secret)
-        params.update({'secret': otp_secret})
+        params.update(secret=otp_secret)
 
     return urlencode(params)
 
 
-def get_otpauth_url(otp) -> str:
+def get_otpauth_url(otp: Payload.OtpParameters) -> str:
     otp_type = OtpType.get(otp.type, '')
     otp_name = quote(otp.name)
     otp_params = get_url_params(otp)
@@ -77,18 +60,34 @@ def get_otpauth_url(otp) -> str:
     return f'otpauth://{otp_type}/{otp_name}?{otp_params}'
 
 
-if __name__ == '__main__':
-    args = parser.parse_args()
-
-    url: ParseResult = urlparse(args.migration)
+def validate_migration(ctx, param, migration) -> list[str]:
+    url: ParseResult = urlparse(migration)
     qs: Dict[str, Any] = parse_qs(url.query)
 
     if is_migration_incorrect(parsed_url=url, parsed_qs=qs):
-        terminate(error='Ensure your otpauth-migration string are correct')
+        raise click.BadParameter(f'migration must be like "{EXAMPLE_MIGRATION}"')
 
-    for payload in decoded_data(data=qs['data']):
+    return qs[PAYLOAD_MARK]
+
+
+@click.command()
+@click.option(
+    '--convert',
+    'migration_data',
+    type=click.UNPROCESSED,
+    callback=validate_migration,
+    help='otpauth-migration link text',
+)
+def decoder(migration_data: list[str]):
+    """Convert Google Authenticator data to plain otpauth links"""
+
+    for payload in decoded_data(data=migration_data):
         migration_payload = Payload()
         migration_payload.ParseFromString(payload)
 
         for otp_item in migration_payload.otp_parameters:
-            print(get_otpauth_url(otp_item), file=sys.stdout)
+            print(get_otpauth_url(otp_item))
+
+
+if __name__ == '__main__':
+    decoder()
