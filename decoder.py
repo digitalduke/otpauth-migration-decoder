@@ -1,9 +1,27 @@
-import click
-from base64 import b64decode, b32encode
-from typing import Dict, Any, List
-from urllib.parse import urlparse, parse_qs, ParseResult, urlencode, quote
+from base64 import (
+    b32encode,
+    b64decode,
+)
+from typing import (
+    Any,
+    Dict,
+    List,
+)
+from urllib.parse import (
+    ParseResult,
+    parse_qs,
+    quote,
+    urlencode,
+    urlparse,
+)
 
-from otpauth_enums import Algorithm, DigitCount, OtpType
+import click
+
+from otpauth_enums import (
+    Algorithm,
+    DigitCount,
+    OtpType,
+)
 from otpauth_migration_pb2 import Payload
 
 
