@@ -33,7 +33,7 @@ plugins = ["setuptools"]
 
 [[package]]
 name = "nuitka"
-version = "0.6.15.3"
+version = "0.6.16"
 description = "Python compiler with full language support and CPython compatibility"
 category = "dev"
 optional = false
@@ -77,7 +77,7 @@ isort = [
     {file = "isort-5.9.1.tar.gz", hash = "sha256:83510593e07e433b77bd5bff0f6f607dbafa06d1a89022616f02d8b699cfcd56"},
 ]
 nuitka = [
-    {file = "Nuitka-0.6.15.3.tar.gz", hash = "sha256:6c2cf6394cb8bb27d12ec389f9cb642b613f5ca5662e4a5abbf4866afb814d98"},
+    {file = "Nuitka-0.6.16.tar.gz", hash = "sha256:f194af0eecacda5b44c7bd26a29ddf3a9165dfda02731466ce17ed1ebd151b8b"},
 ]
 protobuf = [
     {file = "protobuf-3.17.3-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:ab6bb0e270c6c58e7ff4345b3a803cc59dbee19ddf77a4719c5b635f1d547aa8"},
