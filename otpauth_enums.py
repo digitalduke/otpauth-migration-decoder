@@ -1,19 +1,19 @@
-from typing import Dict
+from collections.abc import Mapping
 
 
-Algorithm: Dict[int, str] = {
+Algorithm: Mapping[int, str] = {
     1: 'SHA1',
     2: 'SHA256',
     3: 'SHA512',
     4: 'MD5',
 }
 
-DigitCount: Dict[int, str] = {
+DigitCount: Mapping[int, str] = {
     1: '6',
     2: '8',
 }
 
-OtpType: Dict[int, str] = {
+OtpType: Mapping[int, str] = {
     1: 'hotp',
     2: 'totp',
 }
