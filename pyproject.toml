@@ -17,6 +17,7 @@ pytest-cov = "*"
 tox = "*"
 tox-poetry = "*"
 mypy = "^0.910"
+types-protobuf = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
