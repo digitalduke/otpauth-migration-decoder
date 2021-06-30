@@ -59,8 +59,8 @@ _PAYLOAD_ALGORITHM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=443,
-  serialized_end=564,
+  serialized_start=447,
+  serialized_end=568,
 )
 _sym_db.RegisterEnumDescriptor(_PAYLOAD_ALGORITHM)
 
@@ -89,8 +89,8 @@ _PAYLOAD_DIGITCOUNT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=566,
-  serialized_end=651,
+  serialized_start=570,
+  serialized_end=655,
 )
 _sym_db.RegisterEnumDescriptor(_PAYLOAD_DIGITCOUNT)
 
@@ -119,8 +119,8 @@ _PAYLOAD_OTPTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=653,
-  serialized_end=726,
+  serialized_start=657,
+  serialized_end=730,
 )
 _sym_db.RegisterEnumDescriptor(_PAYLOAD_OTPTYPE)
 
@@ -194,8 +194,8 @@ _PAYLOAD_OTPPARAMETERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=201,
-  serialized_end=441,
+  serialized_start=205,
+  serialized_end=445,
 )
 
 _PAYLOAD = _descriptor.Descriptor(
@@ -256,8 +256,8 @@ _PAYLOAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=47,
-  serialized_end=726,
+  serialized_start=51,
+  serialized_end=730,
 )
 
 _PAYLOAD_OTPPARAMETERS.fields_by_name['algorithm'].enum_type = _PAYLOAD_ALGORITHM
