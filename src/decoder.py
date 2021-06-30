@@ -2,10 +2,12 @@ from base64 import (
     b32encode,
     b64decode,
 )
+from collections.abc import Generator
 from typing import (
     Any,
     Dict,
     List,
+    Union,
 )
 from urllib.parse import (
     ParseResult,
@@ -45,7 +47,7 @@ def is_migration_incorrect(
     )
 
 
-def decoded_data(data: List[str]) -> bytes:
+def decoded_data(data: List[str]) -> Generator:
     for data_item in data:
         yield b64decode(data_item)
 
@@ -55,7 +57,7 @@ def decode_secret(secret: bytes) -> str:
 
 
 def get_url_params(otp: Payload.OtpParameters) -> str:
-    params = dict()
+    params: dict[str, Union[str, int]] = {}
 
     if otp.algorithm:
         params.update(algorithm=Algorithm.get(otp.algorithm, ''))
@@ -78,7 +80,7 @@ def get_otpauth_url(otp: Payload.OtpParameters) -> str:
     return f'otpauth://{otp_type}/{otp_name}?{otp_params}'
 
 
-def validate_migration(ctx, param, migration) -> list[str]:
+def validate_migration(ctx: click.Context, param: click.Option, migration: str) -> list[str]:
     url: ParseResult = urlparse(migration)
     qs: Dict[str, Any] = parse_qs(url.query)
 
