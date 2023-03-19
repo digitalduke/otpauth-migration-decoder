@@ -5,7 +5,7 @@ description = "Convert otpauth-migration to plain link"
 authors = ["digitalduke <digitalduke@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.11"
 protobuf = "^3.17.3"
 click = "^8.0.1"
 
