@@ -4,3 +4,4 @@ decoder.dist/
 .fleet/
 .envrc
 *.pyc
+.gitconfig
