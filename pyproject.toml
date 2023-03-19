@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "otpauth-migration-decoder"
-version = "0.1.1"
+version = "1.0"
 description = "Convert otpauth-migration to plain link"
 authors = ["digitalduke <digitalduke@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-protobuf = "^3.17.3"
+protobuf = "^4.22.1"
 click = "^8.0.1"
 
 [tool.poetry.dev-dependencies]
@@ -22,3 +22,20 @@ types-protobuf = "*"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+line_length = 120
+indent = '    '
+multi_line_output = 3
+no_lines_before = "LOCALFOLDER"
+use_parentheses = true
+lines_after_imports = 2
+skip_glob = ".tox,.direnv,*_pb2.py"
+include_trailing_comma = true
+case_sensitive = true
+force_grid_wrap = 2
+combine_as_imports = true
+
+[tool.mypy]
+exclude = "protobuf/"
+ignore_missing_imports = true

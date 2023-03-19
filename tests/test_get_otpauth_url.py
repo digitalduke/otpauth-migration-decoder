@@ -1,5 +1,5 @@
 from src.decoder import get_otpauth_url
-from src.otpauth_migration_pb2 import Payload
+from src.protobuf.otpauth_migration_pb2 import Payload
 
 
 def test_get_otpauth_url():

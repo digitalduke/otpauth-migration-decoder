@@ -24,7 +24,7 @@ from otpauth_enums import (
     DigitCount,
     OtpType,
 )
-from otpauth_migration_pb2 import Payload
+from protobuf.otpauth_migration_pb2 import Payload
 
 
 SCHEME = 'otpauth-migration'
