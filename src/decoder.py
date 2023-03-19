@@ -19,7 +19,7 @@ from urllib.parse import (
 
 import click
 
-from otpauth_enums import (
+from enums import (
     Algorithm,
     DigitCount,
     OtpType,
