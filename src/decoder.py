@@ -97,13 +97,13 @@ def cli():
 
 @cli.command()
 @click.option(
-    '--convert',
+    '--migration',
     'migration_data',
     type=click.UNPROCESSED,
     callback=validate_migration,
     help='otpauth-migration link text',
 )
-def decoder(migration_data: list[str]):
+def decode(migration_data: list[str]):
     """Convert Google Authenticator data to plain otpauth links"""
 
     for payload in decoded_data(data=migration_data):
