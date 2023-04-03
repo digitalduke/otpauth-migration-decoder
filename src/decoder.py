@@ -18,8 +18,11 @@ from urllib.parse import (
 )
 
 import click
+from PIL import Image
+from pyzbar.pyzbar import decode as pyzbar_decode
+from pyzbar.pyzbar_error import PyZbarError
 
-from otpauth_enums import (
+from enums import (
     Algorithm,
     DigitCount,
     OtpType,
@@ -90,15 +93,20 @@ def validate_migration(ctx: click.Context, param: click.Option, migration: str) 
     return qs[PAYLOAD_MARK]
 
 
-@click.command()
+@click.group()
+def cli():
+    """otpauth-migration decoder"""
+
+
+@cli.command()
 @click.option(
-    '--convert',
+    '--migration',
     'migration_data',
     type=click.UNPROCESSED,
     callback=validate_migration,
     help='otpauth-migration link text',
 )
-def decoder(migration_data: list[str]):
+def decode(migration_data: list[str]):
     """Convert Google Authenticator data to plain otpauth links"""
 
     for payload in decoded_data(data=migration_data):
@@ -109,5 +117,24 @@ def decoder(migration_data: list[str]):
             print(get_otpauth_url(otp_item))
 
 
+@cli.command()
+@click.option(
+    '--file',
+    'filename',
+    type=click.Path(exists=True),
+    help='file name or path with file name'
+)
+def extract(filename: str):
+    """Extract otpauth-migration from qr-code image"""
+    with Image.open(filename) as qr_code_image:
+        try:
+            data = pyzbar_decode(qr_code_image)
+        except PyZbarError:
+            click.echo('Unsupported image format')
+
+        for item in data:
+            click.echo(item.data)
+
+
 if __name__ == '__main__':
-    decoder()
+    cli()

@@ -12,7 +12,7 @@ Convert Google Authenticator data to plain otpauth links
 ## example
 
 ```
-$ python decoder.py --convert "otpauth-migration://offline?data=CjEKCkhlbGxvId6tvu8SGEV4YW1wbGU6YWxpY2VAZ29vZ2xlLmNvbRoHRXhhbXBsZTAC"
+$ python decoder.py decode --migration "otpauth-migration://offline?data=CjEKCkhlbGxvId6tvu8SGEV4YW1wbGU6YWxpY2VAZ29vZ2xlLmNvbRoHRXhhbXBsZTAC"
 ```
 
 ## setup from scratch
