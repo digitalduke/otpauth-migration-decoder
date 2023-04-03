@@ -222,17 +222,6 @@ files = [
 ]
 
 [[package]]
-name = "nuitka"
-version = "0.6.19.7"
-description = "Python compiler with full language support and CPython compatibility"
-category = "dev"
-optional = false
-python-versions = "*"
-files = [
-    {file = "Nuitka-0.6.19.7.tar.gz", hash = "sha256:15f9618f3536b9933fe0e621ecfc8cb6ec0893cf23ef28be95392ac192a464be"},
-]
-
-[[package]]
 name = "packaging"
 version = "23.0"
 description = "Core utilities for Python packages"
@@ -565,4 +554,4 @@ test = ["covdefaults (>=2.2.2)", "coverage (>=7.1)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "4b2e4084283737734de0d6a24f4f6d7327d53a36f2ddc7c6f9de96d1fe8f8649"
+content-hash = "1d8fcb4c8e42457f8f50a87b36bc31a3a1fc6c98998700e56cc873efc189d2c8"
