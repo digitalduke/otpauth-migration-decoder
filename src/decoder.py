@@ -90,7 +90,12 @@ def validate_migration(ctx: click.Context, param: click.Option, migration: str) 
     return qs[PAYLOAD_MARK]
 
 
-@click.command()
+@click.group()
+def cli():
+    """otpauth-migration decoder"""
+
+
+@cli.command()
 @click.option(
     '--convert',
     'migration_data',
@@ -110,4 +115,4 @@ def decoder(migration_data: list[str]):
 
 
 if __name__ == '__main__':
-    decoder()
+    cli()
