@@ -8,6 +8,8 @@ authors = ["digitalduke <digitalduke@gmail.com>"]
 python = "^3.11"
 protobuf = "^4.22.1"
 click = "^8.1.3"
+pyzbar = "^0.1.9"
+pillow = "^9.5.0"
 
 [tool.poetry.dev-dependencies]
 Nuitka = "^0.6.19.7"
