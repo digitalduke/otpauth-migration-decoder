@@ -18,6 +18,9 @@ from urllib.parse import (
 )
 
 import click
+from PIL import Image
+from pyzbar.pyzbar import decode as pyzbar_decode
+from pyzbar.pyzbar_error import PyZbarError
 
 from enums import (
     Algorithm,
@@ -112,6 +115,25 @@ def decode(migration_data: list[str]):
 
         for otp_item in migration_payload.otp_parameters:
             print(get_otpauth_url(otp_item))
+
+
+@cli.command()
+@click.option(
+    '--file',
+    'filename',
+    type=click.Path(exists=True),
+    help='file name or path with file name'
+)
+def extract(filename: str):
+    """Extract otpauth-migration from image with qr-code"""
+    with Image.open(filename) as qr_code_image:
+        try:
+            data = pyzbar_decode(qr_code_image)
+        except PyZbarError:
+            click.echo('Unsupported image format')
+
+        for item in data:
+            click.echo(item.data)
 
 
 if __name__ == '__main__':
