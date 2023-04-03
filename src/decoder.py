@@ -125,7 +125,7 @@ def decode(migration_data: list[str]):
     help='file name or path with file name'
 )
 def extract(filename: str):
-    """Extract otpauth-migration from image with qr-code"""
+    """Extract otpauth-migration from qr-code image"""
     with Image.open(filename) as qr_code_image:
         try:
             data = pyzbar_decode(qr_code_image)
